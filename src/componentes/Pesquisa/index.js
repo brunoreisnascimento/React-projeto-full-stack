@@ -1,8 +1,8 @@
 
 import styled from "styled-components";
 import  Input from "../Input";
-import { useState } from "react";
-import { livros } from "../Pesquisa/dadosPesquisa";
+import { useEffect, useState } from "react";
+import getLivros from "../../servicos/livros";
 
 
 const PesquisaContainer = styled.section`
@@ -27,26 +27,38 @@ const SubTitulo = styled.h3`
         margin-bottom: 40px;
 `
 
+const Result = styled.div`
+display: flex;
+justify-content: center;
+align-items: center;
+margin-bottom: 20px;
+cursor: pointer;
+p {
+    width: 200px;
+}
+img {
+    width: 100px;
+}
+&:hover {
+    border: 1px solid white;
+}
+`
 function Pesquisa() {
 
     const [LivrosPesquisados, setLivrosPesquisados] = useState([])
+    const [livros, setLivros] = useState([])
 
-    const Result = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 20px;
-    cursor: pointer;
-    p {
-        width: 200px;
+    useEffect(() =>{
+        fetchLivros()
+    }, [])
+
+
+    async function fetchLivros() {
+        const livrosAPI =  await getLivros()
+        setLivros(livrosAPI)
     }
-    img {
-        width: 100px;
-    }
-    &:hover {
-        border: 1px solid white;
-    }
-    `
+
+
     return(
         <PesquisaContainer>
             <Titulo>Já sabe por onde começar?</Titulo>
