@@ -1,4 +1,3 @@
-import Header from "../componentes/Header";
 import Pesquisa from "../componentes/Pesquisa";
 import styled from 'styled-components';
 import UltimosLancamentos from "../componentes/UltimosLancamentos"
